@@ -1,0 +1,1 @@
+//TODO https://chat.openai.com/c/9f44f6a6-9a67-4800-8de2-72053b994476 ja tem o prompt com resposta
