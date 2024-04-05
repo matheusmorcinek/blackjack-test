@@ -33,17 +33,20 @@ app.get('/blackjack/status', (req, res) => {
     };
 
     const status = blackjack.status;
-    const playerHand = blackjack.playerHand;
-    const dealerHand = blackjack.dealerHand;
-    const playerScore = blackjack.calculateScore(playerHand);
-    const dealerScore = blackjack.status !== 'ongoing' ? blackjack.calculateScore(dealerHand) : 'Hidden';
 
     res.json({
         status,
-        playerHand,
-        playerScore,
-        dealerHand: blackjack.status === 'ongoing' ? ['Hidden', ...dealerHand.slice(1)] : dealerHand,
-        dealerScore
+        player: {
+            hand: blackjack.playerHand,
+            score: blackjack.playerScore
+        },
+        dealer: {
+            hand: blackjack.status === 'ongoing' ? [{
+                "suit": 'Hidden',
+                "value": 'Hidden'
+            }, ...blackjack.dealerHand.slice(1)] : blackjack.dealerHand,
+            score: blackjack.dealerScore
+        }
     });
 });
 
@@ -61,3 +64,6 @@ app.post('/blackjack/hit', (req, res) => {
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);
 });
+
+
+module.exports = app;

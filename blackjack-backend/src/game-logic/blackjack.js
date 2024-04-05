@@ -4,7 +4,7 @@ class Blackjack {
     constructor() {
         this.deck = new Deck();
         this.resetGame();
-    }
+    };
 
     resetGame() {
         this.deck.shuffle();
@@ -13,13 +13,13 @@ class Blackjack {
         this.playerScore = 0;
         this.dealerScore = 0;
         this.status = 'ongoing'; // ongoing, player_won, dealer_won, tie
-    }
+    };
 
     dealInitialCards() {
         this.playerHand.push(this.deck.draw(), this.deck.draw());
         this.dealerHand.push(this.deck.draw(), this.deck.draw());
         this.updateScores();
-    }
+    };
 
     playerHit() {
         if (this.status !== 'ongoing') {
@@ -32,7 +32,7 @@ class Blackjack {
         if (this.playerScore > 21) {
             this.status = 'dealer_won';
         };
-    }
+    };
 
     playerStand() {
         //move to a seppareted method?
@@ -42,12 +42,12 @@ class Blackjack {
         };
 
         this.decideWinner();
-    }
+    };
 
     updateScores() {
         this.playerScore = this.calculateScore(this.playerHand);
         this.dealerScore = this.calculateScore(this.dealerHand);
-    }
+    };
 
     decideWinner() {
         if (this.playerScore > 21) {
@@ -59,7 +59,7 @@ class Blackjack {
         } else {
             this.status = 'tie';
         };
-    }
+    };
 
     calculateScore(hand) {
         let score = 0;
@@ -83,38 +83,3 @@ class Blackjack {
 };
 
 module.exports = Blackjack;
-
-// const Deck = require('./deck');
-
-// class Blackjack {
-//     constructor() {
-//         this.deck = new Deck();
-//         this.playerHand = [];
-//         this.dealerHand = [];
-//         this.playerScore = 0;
-//         this.dealerScore = 0;
-//         this.status = 'ongoing'; // ongoing, player_won, dealer_won, tie
-//     };
-
-//     calculateScore(hand) {
-//         let score = 0;
-//         let aces = 0;
-
-//         for (let card of hand) {
-//             if (card.value === 'A') {
-//                 aces++;
-//             };
-
-//             score += card.getScore();
-//         };
-
-//         while (score > 21 && aces > 0) {
-//             score -= 10;
-//             aces--;
-//         };
-
-//         return score;
-//     }
-// };
-
-// module.exports = Blackjack;

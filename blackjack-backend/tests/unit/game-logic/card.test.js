@@ -1,4 +1,4 @@
-const Card = require('../../src/game-logic/card');
+const Card = require('../../../src/game-logic/card');
 
 describe('Card class', () => {
 

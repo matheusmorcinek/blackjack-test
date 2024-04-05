@@ -1,4 +1,4 @@
-const Deck = require('../../src/game-logic/deck'); 
+const Deck = require('../../../src/game-logic/deck'); 
 
 describe('Deck class', () => {
   let deck;

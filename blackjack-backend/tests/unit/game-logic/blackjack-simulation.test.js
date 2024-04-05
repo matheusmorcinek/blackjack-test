@@ -1,5 +1,5 @@
-const Blackjack = require('../../src/game-logic/blackjack');
-const Card = require('../../src/game-logic/card'); 
+const Blackjack = require('../../../src/game-logic/blackjack');
+const Card = require('../../../src/game-logic/card'); 
 
 describe('Full game simulation', () => {
     let game;
