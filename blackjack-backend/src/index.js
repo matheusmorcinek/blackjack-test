@@ -1,27 +1,34 @@
 const Blackjack = require('./game-logic/blackjack');
 
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const port = 3000;
 
+app.use(cors({
+    origin: 'http://localhost:5173'
+}));
 app.use(express.json());
 
 let blackjack;
 
 app.post('/blackjack/start', (req, res) => {
-    blackjack = new Blackjack();
-    blackjack.dealInitialCards();
-    res.status(200).json({
-        message: "New game started",
-        player: {
-            hand: blackjack.playerHand,
-            score: blackjack.playerScore,
-        },
-        dealer: {
-            hand: blackjack.dealerHand,
-            score: blackjack.dealerScore,
-        }
-    });
+    const delay = Math.floor(Math.random() * (3000 - 1000 + 1) + 1000); // Generates a random delay between 1000ms (1s) and 3000ms (3s)
+    setTimeout(() => {
+        blackjack = new Blackjack();
+        blackjack.dealInitialCards();
+        res.status(200).json({
+            message: "New game started",
+            player: {
+                hand: blackjack.playerHand,
+                score: blackjack.playerScore,
+            },
+            dealer: {
+                hand: blackjack.dealerHand,
+                score: blackjack.dealerScore,
+            }
+        });
+    }, delay);
 });
 
 app.get('/blackjack/status', (req, res) => {
