@@ -1,0 +1,13 @@
+.title {
+    color: var(--title);
+}
+
+.innerContainer {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
+.points {
+    color: var(--title);
+}

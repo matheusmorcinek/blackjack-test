@@ -1,0 +1,26 @@
+.card {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 140px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px var(--gray-line);
+    border: 0.5px solid var(--gray);
+    margin: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: var(--white);
+    font-family: "Inter", sans-serif;
+    user-select: none; 
+}
+
+.card.heart,
+.card.diamond {
+    color: var(--red);
+}
+
+.card.club,
+.card.spade {
+    color: var(--text);
+}

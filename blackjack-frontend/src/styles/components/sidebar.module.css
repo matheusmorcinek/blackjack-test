@@ -1,0 +1,104 @@
+.container {
+    position: absolute;
+    height: 100%;
+    width: auto;
+    max-width: 14rem;
+    min-width: 3.5rem;
+    min-height: 20rem;
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-width: 0.15rem;
+    border-style: solid;
+    border-image:
+        linear-gradient(to top,
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0)) 1 100%;
+}
+
+.container>img {
+    position: absolute;
+    top: 0;
+    margin: 2rem;
+}
+
+.container button {
+    background: transparent;
+    border: 0;
+    font-size: 0;
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: inherit;
+}
+
+.container .selected {
+    height: 3rem;
+    width: 0.15rem;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    background: var(--dark);
+    position: absolute;
+    left: 0;
+    display: none;
+}
+
+/* Adjust for extra small screens, e.g., small phones */
+@media (max-width: 576px) {
+    .container {
+        flex-direction: row;
+        height: auto;
+        width: 100%;
+        bottom: 0;
+        max-width: none;
+        min-height: 2rem;
+        justify-content: space-around;
+        align-items: center;
+        min-width: 300px;
+    }
+
+    .container>img {
+        position: relative;
+        margin: 0;
+    }
+
+    .container button {
+        margin: 0;
+    }
+
+    .container .selected {
+        height: 0;
+        width: 0;   
+    }
+}
+
+.settings {
+    /* position: absolute;
+    bottom: 1.5rem; */
+}
+
+.container button:nth-child(2):hover {
+    background-image: url('/icons/home-hover.svg');
+}
+
+.container button:nth-child(2):hover>div {
+    display: initial;
+}
+
+.container button:nth-child(3):hover {
+    background-image: url('/icons/leaderboard-hover.svg');
+}
+
+.container button:nth-child(3):hover>div {
+    display: initial;
+}
+
+.container button:nth-child(4):hover {
+    background-image: url('/icons/settings-hover.svg');
+}
+
+.container button:nth-child(4):hover>div {
+    display: initial;
+}
+
