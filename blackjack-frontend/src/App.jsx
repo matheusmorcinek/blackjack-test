@@ -8,6 +8,7 @@ import styles from './styles/home.module.css';
 import NewGameModal from './components/new-game-modal';
 import { startBlackjack } from './store/actions/blackjack-start';
 import { useDispatch, useSelector } from 'react-redux';
+import SkeletonLoader from './components/skeleton-loader';
 
 const response = {
   "message": "New game started",
@@ -41,6 +42,8 @@ const response = {
 
 export function App() {
 
+  //TODO - implement the logic for, each action, return the array of actions in the status servcei, so we can show in the scree, like the last action of the dealer or player
+
   const [gameStarted, setGameStarted] = useState(false);
   const [playerName, setPlayerName] = useState('');
 
@@ -55,36 +58,34 @@ export function App() {
   };
 
   // return (<h1>Hello!!!!</h1>)
-  if (!gameStarted) return <NewGameModal onStartGame={handleStartGame} />;
-  if (message) return <h1>{message}</h1>;
-  if (status === 'loading') return <h1>Loading...</h1>;
-  if (status === 'failed') return <h1>Error: {error}</h1>;
+  // if (!gameStarted) return <NewGameModal onStartGame={handleStartGame} />;
+  // if (message) return <h1>{message}</h1>;
+  // if (status === 'loading') return <h1>Loading...</h1>;
+  // if (status === 'failed') return <h1>Error: {error}</h1>;
 
   // <DecisionModal />
-  // return (
-  //   <>
-  //     {!gameStarted && <NewGameModal onStartGame={handleStartGame} />}
-  //     {
-  //       gameStarted && (
-  //         <>
-  //           <Sidebar />
-  //           <div className={styles.container}>
-  //             <Profile />
-  //             <div className={styles.gameContainer}>
-  //               <HandDisplay
-  //                 role="dealer"
-  //                 cards={response.dealer.hand}
-  //                 points={response.dealer.score}
-  //               />
-  //               <HandDisplay
-  //                 role="player"
-  //                 cards={response.player.hand}
-  //                 points={response.player.score}
-  //               />
-  //             </div>
-  //           </div>
-  //         </>)
-  //     }
-  //   </>
-  // );
+  // {status === 'loading' ? ( <div className={styles.container}><SkeletonLoader style={{ width: '100px', height: '20px', borderRadius: '4px' }} /></div>) : (
+
+  if (!gameStarted) return <NewGameModal onStartGame={handleStartGame} />;
+  if (gameStarted) return (
+    <>
+      <Sidebar />
+      <div className={styles.container}>
+        <Profile isLoading={status === 'loading'}/>
+        <div className={styles.gameContainer}>
+          <HandDisplay
+            role="dealer"
+            cards={response.dealer.hand}
+            points={response.dealer.score}
+          />
+          <HandDisplay
+            role="player"
+            cards={response.player.hand}
+            points={response.player.score}
+          />
+        </div>
+      </div>
+      )
+    </>
+  );
 };

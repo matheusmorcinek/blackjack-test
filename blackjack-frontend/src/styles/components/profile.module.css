@@ -4,28 +4,50 @@
     margin-bottom: 1rem;
 }
 
-.profileContainer > img {
+.profileImage {
     height: 5.5rem;
     width: 5.5rem;
     border-radius: 50%;
     border: solid 1px var(--text);
 }
 
-.profileContainer div {
+.profileInnerContainer {
     margin-left: 1.5rem;
 }
 
-.profileContainer div strong {
+.profileName {
     font-size: 1.5rem;
     font-weight: 600;
     color: var(--title) ;
 }
 
-.profileContainer div p {
+.levelContainer {
     font-size: 1rem;
     margin-top: 0.5rem;
 }
 
-.profileContainer div p img{
+.levelContainer img{
     margin-right: 0.5rem;
+}
+
+/* custom skeleton part */
+.profileSkeletonImage {
+    height: 5.5rem;
+    width: 5.5rem;
+    border-radius: 50%;
+    border: solid 1px var(--white);
+    margin-left: 0 !important;
+}
+
+.profileNameSkeleton {
+    height: 1.5rem;
+    width: 14rem;
+    border: solid 1px var(--white);
+}
+
+.profileLevelSkeleton {
+    height: 20px;
+    width: 5rem;
+    border: solid 1px var(--white);
+    margin-top: 0.5rem;
 }
