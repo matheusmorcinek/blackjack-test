@@ -1,0 +1,27 @@
+.messageContainer {
+    display: flex;
+    width: 100%;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    color: var(--text);
+    font-size: 1.2rem;
+}
+
+@media (max-width: 992px) {
+    .messageContainer {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .messageContainer {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .messageContainer {
+        font-size: 0.9rem;
+    }
+}

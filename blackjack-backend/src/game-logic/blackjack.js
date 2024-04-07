@@ -21,6 +21,15 @@ class Blackjack {
         this.updateScores();
     };
 
+    dealerPlay() {
+        while (this.dealerScore < 17) {
+            this.dealerHand.push(this.deck.draw());
+            this.updateScores();
+        };
+
+        this.decideWinner();
+    };
+
     playerHit() {
         if (this.status !== 'ongoing') {
             throw new Error("Game is not in an 'ongoing' state.");
@@ -35,11 +44,11 @@ class Blackjack {
     };
 
     playerStand() {
-        //move to a seppareted method?
-        while (this.dealerScore < 17) {
-            this.dealerHand.push(this.deck.draw());
-            this.updateScores();
+        if (this.status !== 'ongoing') {
+            throw new Error("Game is not in an 'ongoing' state.");
         };
+
+        this.dealerPlay();
 
         this.decideWinner();
     };

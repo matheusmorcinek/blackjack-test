@@ -1,9 +1,8 @@
 export const INITIAL_STATE = {
     status: 'idle', // or: 'loading', 'succeeded', 'failed'
-    data: {}
 };
 
-const blackjackStatusReducer = (state = INITIAL_STATE, action) => {
+const blackjackPlayerHitReducer = (state = INITIAL_STATE, action) => {
 
     //removing unnecessary console logs, the first reducers calls are just the Redux checks.
     // if (!action.type.includes('@@redux')) {
@@ -15,28 +14,23 @@ const blackjackStatusReducer = (state = INITIAL_STATE, action) => {
 
     switch (action.type) {
 
-        case 'BLACKJACK_STATUS_LOADED': {
-
-            console.log('@@@@@ chegou aqui', action.payload)
+        case 'BLACKJACK_PLAYER_HIT_LOADED': {
 
             return {
-                status: 'succeeded',
-                data: action.payload
+                status: 'succeeded'
             };
         };
 
-        case 'BLACKJACK_STATUS_LOADING': {
+        case 'BLACKJACK_PLAYER_HIT_LOADING': {
 
             return {
-                ...state,
                 status: 'loading'
             };
         };
 
-        case 'BLACKJACK_STATUS_FAILED': {
+        case 'BLACKJACK_PLAYER_HIT_FAILED': {
 
             return {
-                ...state,
                 status: 'failed'
             };
         };
@@ -47,4 +41,4 @@ const blackjackStatusReducer = (state = INITIAL_STATE, action) => {
     };
 };
 
-export default blackjackStatusReducer;
+export default blackjackPlayerHitReducer;

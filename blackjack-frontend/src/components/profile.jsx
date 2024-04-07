@@ -25,7 +25,7 @@ const Profile = ({ isLoading, name = 'Matheus Morcinek', imageUrl = 'https://git
         <div className={styles.profileContainer}>
             <img className={styles.profileImage} src='https://github.com/matheusmorcinek.png' alt='Profile photo' />
             <div className={styles.profileInnerContainer}>
-                <strong className={styles.profileName}>Matheus Morcinek</strong>
+                <strong className={styles.profileName}>{name}</strong>
                 <p className={styles.levelContainer}>
                     <img src='icons/level.svg' alt='Level icon' />
                     Level {level}

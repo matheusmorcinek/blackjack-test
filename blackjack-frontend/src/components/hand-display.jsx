@@ -8,7 +8,7 @@ const HandDisplay = ({ role }) => {
 
     const blackjackStatus = useSelector((state) => state.blackjackStatus);
 
-    if (blackjackStatus.status === 'loading' || blackjackStatus.status === 'idle') return <h1>loading...</h1>;
+    // if (blackjackStatus.status === 'loading' || blackjackStatus.status === 'idle') return <h1>loading...</h1>;
 
     return (
         <div>

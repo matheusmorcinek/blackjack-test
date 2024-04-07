@@ -6,12 +6,12 @@ export const INITIAL_STATE = {
 const blackjackStartReducer = (state = INITIAL_STATE, action) => {
 
     //removing unnecessary console logs, the first reducers calls are just the Redux checks.
-    if (!action.type.includes('@@redux')) {
-        console.log(' ');
-        console.log('COURSE Reducer');
-        console.log('current state', state);
-        console.log('action', action);
-    }
+    // if (!action.type.includes('@@redux')) {
+    //     console.log(' ');
+    //     console.log('COURSE Reducer');
+    //     console.log('current state', state);
+    //     console.log('action', action);
+    // }
 
     switch (action.type) {
 

@@ -2,8 +2,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 100px;
-    height: 140px;
+    width: 85px;
+    height: 120px;
     border-radius: 10px;
     box-shadow: 0 2px 4px var(--gray-line);
     border: 0.5px solid var(--gray);

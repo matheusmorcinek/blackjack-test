@@ -60,7 +60,7 @@ app.get('/blackjack/status', (req, res) => {
     }, delay);
 });
 
-app.post('/blackjack/hit', (req, res) => {
+app.post('/blackjack/player/hit', (req, res) => {
     if (!blackjack) {
         return res.status(400).json({
             message: "Game not found. Please start a new game."
@@ -69,6 +69,29 @@ app.post('/blackjack/hit', (req, res) => {
 
     try {
         blackjack.playerHit();
+
+        res.status(200).json({
+            player: {
+                hand: blackjack.playerHand,
+                score: blackjack.playerScore,
+            }
+        });
+    } catch (error) {
+        return res.status(400).json({
+            message: error.message
+        });
+    };
+});
+
+app.post('/blackjack/player/stand', (req, res) => {
+    if (!blackjack) {
+        return res.status(400).json({
+            message: "Game not found. Please start a new game."
+        });
+    };
+
+    try {
+        blackjack.playerStand();
 
         res.status(200).json({
             player: {
