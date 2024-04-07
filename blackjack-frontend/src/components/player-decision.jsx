@@ -8,6 +8,15 @@ const PlayerDecision = () => {
     const dispatch = useDispatch();
 
     const [timer, setTimer] = useState(60);
+    const [dots, setDots] = useState('');
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setDots((prevDots) => (prevDots.length < 3 ? prevDots + '.' : '.'));
+        }, 500); 
+
+        return () => clearInterval(interval);
+    }, []);
 
     useEffect(() => {
         if (timer === 0) {
@@ -24,19 +33,20 @@ const PlayerDecision = () => {
     const onHit = () => {
         dispatch(playerHit());
     };
-    const onStand = () => { };
+    const onStand = () => {
+        
+    };
 
     return (
-        <>
-            <div className={styles.timer}>{timer}</div>
-            <p className={styles.title}>Make your decision</p>
-            <div>
+        <div className={styles.decisionContainer}>
+            <div className={styles.timer}>{timer} Make your decision<span>{dots}</span></div>
+            <div className={styles.innerButtonContainer}>
                 <button className={`${styles.button} ${styles.disabledButton}`} disabled>Double</button>
                 <button className={`${styles.button} ${styles.hitButton}`} onClick={onHit}>Hit</button>
                 <button className={`${styles.button} ${styles.standButton}`} onClick={onStand}>Stand</button>
                 <button className={`${styles.button} ${styles.disabledButton}`} disabled>Split</button>
             </div>
-        </>
+        </div>
     );
 };
 

@@ -6,67 +6,114 @@ import MessageDisplay from './game-message-display';
 import { useDispatch } from 'react-redux';
 import { getBlackjackStatus } from '../store/actions/blackjack-status';
 import InitialGameMessages from './initial-game-messages';
+import GamePlayerActionMessages from './game-player-action-messages';
 
 const gameSteps = [
-    'dealer_preparing_game', 
-    'player_decision', 
-    'dealer_giving_cards_message_display', 
-    'dealer_decision', 
+    'dealer_preparing_game',
+    'player_decision',
+    'dealer_giving_cards_message_display',
+    'dealer_decision',
     'game_result'
 ];
 
-const PlayerDecisionMessage = ({ start }) => {
-
-    const [timeLeft, setTimeLeft] = useState(start || 5);
-
-    useEffect(() => {
-
-        if (timeLeft === 0) return;
-
-        const intervalId = setInterval(() => {
-            setTimeLeft(timeLeft - 1);
-        }, 1000);
-
-        return () => clearInterval(intervalId);
-    }, [timeLeft]);
-
-    const width = (timeLeft / 5) * 100;
-
-    return (
-        <div>
-            <CountdownBar width={width} />
-            <MessageDisplay />
-        </div>
-    )
-};
-
-
 const GameController = () => {
+
+    const dispatch = useDispatch();
+
+    const blackjackStatus = useSelector((state) => state.blackjackStatus);
+    const blackjackPlayerHit = useSelector((state) => state.blackjackPlayerHit);
 
     const [currentStep, setCurrentStep] = useState('dealer_preparing_game');
 
+
     useEffect(() => {
         if (currentStep === 'dealer_preparing_game') {
-
-            //mostra dealer messages
-            //seta o current step para player decision
-            
-            // setTimeout(() => setCurrentStep('player_decision'), 5000);
-        
-        }
-    }, [currentStep]);
+            if (blackjackStatus.status === 'succeeded') {
+                setTimeout(() => setCurrentStep('player_decision'), 1000);
+            };
+        };
+    }, [currentStep, blackjackStatus.status]);
 
     useEffect(() => {
         if (currentStep === 'player_decision') {
-            setTimeout(() => setCurrentStep('dealer_giving_cards_message_display'), 5000);
-        }
-    }, [currentStep]);
 
-    // useEffect(() => {
-    //     if (currentStep === 'dealer_giving_cards_message_display') {
-    //         setTimeout(() => setCurrentStep('dealer_decision'), 5000);
-    //     }
-    // }, [currentStep]);
+            if (blackjackPlayerHit.status === 'loading') {
+                setCurrentStep('player_action_message_display')
+            };
+        }
+    }, [currentStep, blackjackPlayerHit.status]);
+
+    useEffect(() => {
+        if (currentStep === 'player_action_message_display') {
+
+            //check status
+            if (blackjackPlayerHit.status === 'succeeded') {
+                console.log('completouuuuuuuu')
+                dispatch(getBlackjackStatus());
+            };
+
+            // if(blackjackStatus.status === 'succeeded') {
+            //     console.log('verificando status!!!!')
+            // }
+
+            // setTimeout(() => setCurrentStep('dealer_decision'), 5000);
+        }
+    }, [currentStep, blackjackPlayerHit.status]);
+
+    //verifica status
+    useEffect(() => {
+
+        //
+
+        console.log('@@@@ status store');
+        console.log(blackjackStatus);
+        console.log(blackjackPlayerHit);
+
+        if (
+            blackjackStatus.status === 'succeeded' &&
+            currentStep === 'player_action_message_display' &&
+            blackjackPlayerHit.hitCount > 0
+        ) {
+            console.log('verificando status!!!!')
+
+            if (blackjackStatus.data.status === 'dealer_won') {
+                //TODO show dealer won message and end game, show dealer hand,
+                //TODO after 5 seconds show new game message button
+                console.log('@@@@@ dealer won');
+            };
+
+            if (blackjackStatus.data.status === 'player_won') {
+                //show player won message and end game, show dealer hand,
+                //TODO after 5 seconds show new game message button
+                console.log('@@@@@ player won');
+            };
+
+            if(blackjackStatus.data.status === 'tie') {
+                //show tie message and end game, show dealer hand,
+                //TODO after 5 seconds show new game message button
+                console.log('@@@@@ tie');
+            };
+
+            //TODO testar com proximos passos, pode ser que chame aqui quando nao precisarmos
+            if(blackjackStatus.data.status === 'ongoing' && blackjackPlayerHit.hitCount > 0) {
+                console.log('@@@@@ ongoing');
+                setCurrentStep('player_decision');
+            };
+
+
+
+            // possible outcomes
+            // player_won
+            // dealer_won
+            // tie
+            // ongoing
+            // player_busted
+
+
+
+        }
+
+    }, [blackjackStatus.status]);
 
     // useEffect(() => {
     //     if (currentStep === 'dealer_decision') {
@@ -82,10 +129,10 @@ const GameController = () => {
 
     //now I need a retrun with different components for each step
     if (currentStep === 'dealer_preparing_game') return <InitialGameMessages />;
-    if (currentStep === 'player_decision') return <h1>player decision</h1>;
-    if (currentStep === 'dealer_giving_cards_message_display') return <h1>dealer giving cards message display</h1>;
-    if (currentStep === 'dealer_decision') return <h1>dealer decision</h1>;
-    if (currentStep === 'game_result') return <h1>game result</h1>;
+    if (currentStep === 'player_decision') return <PlayerDecision />;
+    if (currentStep === 'player_action_message_display') return <GamePlayerActionMessages />;
+    // if (currentStep === 'dealer_decision') return <h1>dealer decision</h1>;
+    // if (currentStep === 'game_result') return <h1>game result</h1>;
 
 
     // const status = useSelector((state) => state.blackjackStatus);

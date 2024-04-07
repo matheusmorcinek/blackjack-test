@@ -1,29 +1,24 @@
 export const INITIAL_STATE = {
     status: 'idle', // or: 'loading', 'succeeded', 'failed'
+    hitCount: 0,
 };
 
 const blackjackPlayerHitReducer = (state = INITIAL_STATE, action) => {
-
-    //removing unnecessary console logs, the first reducers calls are just the Redux checks.
-    // if (!action.type.includes('@@redux')) {
-    //     console.log(' ');
-    //     console.log('COURSE Reducer');
-    //     console.log('current state', state);
-    //     console.log('action', action);
-    // }
 
     switch (action.type) {
 
         case 'BLACKJACK_PLAYER_HIT_LOADED': {
 
             return {
-                status: 'succeeded'
+                status: 'succeeded',
+                hitCount: state.hitCount + 1
             };
         };
 
         case 'BLACKJACK_PLAYER_HIT_LOADING': {
 
             return {
+                ...state,
                 status: 'loading'
             };
         };
@@ -31,8 +26,13 @@ const blackjackPlayerHitReducer = (state = INITIAL_STATE, action) => {
         case 'BLACKJACK_PLAYER_HIT_FAILED': {
 
             return {
+                ...state,
                 status: 'failed'
             };
+        };
+
+        case 'BLACKJACK_PLAYER_HIT_RESET': {
+            return INITIAL_STATE;
         };
 
         default:

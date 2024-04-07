@@ -17,8 +17,6 @@ const blackjackStatusReducer = (state = INITIAL_STATE, action) => {
 
         case 'BLACKJACK_STATUS_LOADED': {
 
-            console.log('@@@@@ chegou aqui', action.payload)
-
             return {
                 status: 'succeeded',
                 data: action.payload

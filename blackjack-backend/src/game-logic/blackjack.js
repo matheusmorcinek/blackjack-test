@@ -1,4 +1,5 @@
 const Deck = require('./deck');
+const Card = require('./card');
 
 class Blackjack {
     constructor() {
@@ -16,8 +17,11 @@ class Blackjack {
     };
 
     dealInitialCards() {
-        this.playerHand.push(this.deck.draw(), this.deck.draw());
+        this.playerHand.push(this.deck.draw(), this.deck.draw())
         this.dealerHand.push(this.deck.draw(), this.deck.draw());
+        // this.playerHand.push(new Card('♦', 'A'), new Card('♥', 'K'));
+        // this.dealerHand.push(new Card('♦', 'A'), new Card('♥', 'K'));
+        
         this.updateScores();
     };
 
@@ -41,6 +45,10 @@ class Blackjack {
         if (this.playerScore > 21) {
             this.status = 'dealer_won';
         };
+
+        if(this.playerScore === 21) {
+            this.playerStand();
+        };
     };
 
     playerStand() {
@@ -55,6 +63,9 @@ class Blackjack {
 
     updateScores() {
         this.playerScore = this.calculateScore(this.playerHand);
+        if(this.playerScore === 21) {
+            this.decideWinner();
+        }
         this.dealerScore = this.calculateScore(this.dealerHand);
     };
 

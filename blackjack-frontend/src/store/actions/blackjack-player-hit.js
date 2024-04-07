@@ -1,10 +1,12 @@
 export const BLACKJACK_PLAYER_HIT_LOADING = 'BLACKJACK_PLAYER_HIT_LOADING';
 export const BLACKJACK_PLAYER_HIT_FAILURE = 'BLACKJACK_PLAYER_HIT_FAILED';
 export const BLACKJACK_PLAYER_HIT_SUCCESS = 'BLACKJACK_PLAYER_HIT_LOADED';
+export const BLACKJACK_PLAYER_HIT_RESET = 'BLACKJACK_PLAYER_HIT_RESET';
 
 
 export const blackjackPlayerHitLoading = () => ({ type: BLACKJACK_PLAYER_HIT_LOADING });
 export const blackjackPlayerHitFailed = () => ({ type: BLACKJACK_PLAYER_HIT_FAILURE });
+export const blackjackPlayerHitReset = () => ({ type: BLACKJACK_PLAYER_HIT_RESET });
 
 export const blackjackPlayerHitLoaded = (data) => ({
     type: BLACKJACK_PLAYER_HIT_SUCCESS,

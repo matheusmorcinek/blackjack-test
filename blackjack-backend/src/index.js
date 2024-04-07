@@ -13,7 +13,7 @@ app.use(express.json());
 let blackjack;
 
 app.post('/blackjack/start', (req, res) => {
-    const delay = Math.floor(Math.random() * (3000 - 1000 + 1) + 1000); // Generates a random delay between 1000ms (1s) and 3000ms (3s)
+    const delay = Math.floor(Math.random() * (1000 - 1000 + 1) + 1000); // Generates a random delay between 1000ms (1s) and 3000ms (3s)
     setTimeout(() => {
         blackjack = new Blackjack();
         blackjack.dealInitialCards();
@@ -32,7 +32,7 @@ app.post('/blackjack/start', (req, res) => {
 });
 
 app.get('/blackjack/status', (req, res) => {
-    const delay = Math.floor(Math.random() * (3000 - 1000 + 1) + 1000); // Generates a random delay between 1000ms (1s) and 3000ms (3s)
+    const delay = Math.floor(Math.random() * (1000 - 1000 + 1) + 1000); // Generates a random delay between 1000ms (1s) and 3000ms (3s)
     setTimeout(() => {
         if (!blackjack || blackjack.status === 'not_started') {
             return res.status(400).json({
@@ -54,33 +54,38 @@ app.get('/blackjack/status', (req, res) => {
                     "suit": 'Hidden',
                     "value": 'Hidden'
                 }, card] : blackjack.dealerHand,
-                score: card.value === 'A' ? '1/11' : card.value === 'K' || card.value === 'Q' || card.value === 'J' ? 10 : parseInt(card.value)
+                score: blackjack.status === 'ongoing' ? (card.value === 'A' ? '1/11' : card.value === 'K' || card.value === 'Q' || card.value === 'J' ? 10 : parseInt(card.value)) : blackjack.dealerScore
             }
         });
     }, delay);
+
+
 });
 
 app.post('/blackjack/player/hit', (req, res) => {
-    if (!blackjack) {
-        return res.status(400).json({
-            message: "Game not found. Please start a new game."
-        });
-    };
+    const delay = Math.floor(Math.random() * (1000 - 1000 + 1) + 1000); // Generates a random delay between 1000ms (1s) and 3000ms (3s)
+    setTimeout(() => {
+        if (!blackjack) {
+            return res.status(400).json({
+                message: "Game not found. Please start a new game."
+            });
+        };
 
-    try {
-        blackjack.playerHit();
+        try {
+            blackjack.playerHit();
 
-        res.status(200).json({
-            player: {
-                hand: blackjack.playerHand,
-                score: blackjack.playerScore,
-            }
-        });
-    } catch (error) {
-        return res.status(400).json({
-            message: error.message
-        });
-    };
+            res.status(200).json({
+                player: {
+                    hand: blackjack.playerHand,
+                    score: blackjack.playerScore,
+                }
+            });
+        } catch (error) {
+            return res.status(400).json({
+                message: error.message
+            });
+        };
+    }, delay);
 });
 
 app.post('/blackjack/player/stand', (req, res) => {

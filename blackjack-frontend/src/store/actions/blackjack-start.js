@@ -1,7 +1,8 @@
+import { blackjackPlayerHitReset } from './blackjack-player-hit';
+
 export const BLACKJACK_START_LOADING = 'BLACKJACK_START_LOADING';
 export const BLACKJACK_START_FAILURE = 'BLACKJACK_START_FAILED';
 export const BLACKJACK_START_SUCCESS = 'BLACKJACK_START_LOADED';
-
 
 export const blackjackLoading = () => ({ type: BLACKJACK_START_LOADING });
 export const blackjackFailed = () => ({ type: BLACKJACK_START_FAILURE });
@@ -18,6 +19,7 @@ var requestOptions = {
 // Thunk function
 export const startBlackjack = () => async (dispatch) => {
     dispatch(blackjackLoading());
+    dispatch(blackjackPlayerHitReset());
     await fetch('http://localhost:3000/blackjack/start', requestOptions)
         .then(response => {
 
