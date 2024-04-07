@@ -18,43 +18,46 @@ app.post('/blackjack/start', (req, res) => {
         blackjack = new Blackjack();
         blackjack.dealInitialCards();
         res.status(200).json({
-            message: "New game started",
-            player: {
-                hand: blackjack.playerHand,
-                score: blackjack.playerScore,
-            },
-            dealer: {
-                hand: blackjack.dealerHand,
-                score: blackjack.dealerScore,
-            }
+            message: "New game started"
+            // player: {
+            //     hand: blackjack.playerHand,
+            //     score: blackjack.playerScore,
+            // },
+            // dealer: {
+            //     hand: blackjack.dealerHand,
+            //     score: blackjack.dealerScore,
+            // }
         });
     }, delay);
 });
 
 app.get('/blackjack/status', (req, res) => {
+    const delay = Math.floor(Math.random() * (3000 - 1000 + 1) + 1000); // Generates a random delay between 1000ms (1s) and 3000ms (3s)
+    setTimeout(() => {
+        if (!blackjack || blackjack.status === 'not_started') {
+            return res.status(400).json({
+                message: "No active game found. Please start a new game first."
+            });
+        };
 
-    if (!blackjack || blackjack.status === 'not_started') {
-        return res.status(400).json({
-            message: "No active game found. Please start a new game first."
+        const status = blackjack.status;
+        const card = blackjack.dealerHand[1];
+
+        res.json({
+            status,
+            player: {
+                hand: blackjack.playerHand,
+                score: blackjack.playerScore
+            },
+            dealer: {
+                hand: blackjack.status === 'ongoing' ? [{
+                    "suit": 'Hidden',
+                    "value": 'Hidden'
+                }, card] : blackjack.dealerHand,
+                score: card.value === 'A' ? '1/11' : card.value === 'K' || card.value === 'Q' || card.value === 'J' ? 10 : parseInt(card.value)
+            }
         });
-    };
-
-    const status = blackjack.status;
-
-    res.json({
-        status,
-        player: {
-            hand: blackjack.playerHand,
-            score: blackjack.playerScore
-        },
-        dealer: {
-            hand: blackjack.status === 'ongoing' ? [{
-                "suit": 'Hidden',
-                "value": 'Hidden'
-            }, ...blackjack.dealerHand.slice(1)] : blackjack.dealerHand,
-            score: blackjack.dealerScore
-        }
-    });
+    }, delay);
 });
 
 app.post('/blackjack/hit', (req, res) => {

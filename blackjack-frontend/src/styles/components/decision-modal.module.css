@@ -24,7 +24,7 @@
 @media (max-width: 992px) {
     .modal {
         margin-left: 1rem;
-        background-color: red;
+        /* background-color: red; */
     }
 }
 
@@ -32,7 +32,7 @@
 @media (max-width: 768px) {
     .modal {
         margin-left: 3rem;
-        background-color: yellow;
+        /* background-color: yellow; */
     }
 }
 
@@ -40,7 +40,7 @@
 @media (max-width: 576px) {
     .modal {
         margin-left: 1rem;
-        background-color: aliceblue;
+        /* background-color: aliceblue; */
     }
 }
 
