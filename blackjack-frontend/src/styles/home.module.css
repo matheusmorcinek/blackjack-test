@@ -32,7 +32,7 @@
     .container {
         padding: 2.5rem 0.5rem;
         flex-direction: column;
-        max-width: 70%;
+        max-width: 99%;
         min-width: 300px;
         margin: auto;
         /* background-color: blue; */
