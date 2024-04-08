@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import CountdownBar from "./countdown-bar";
 
-const GameResult = ({ role, onCompleteCountdown, secondsToCountdown = 5 }) => {
+const GameResult = ({ result, onCompleteCountdown, secondsToCountdown = 5 }) => {
 
     const [timeLeft, setTimeLeft] = useState(secondsToCountdown);
 
     useEffect(() => {
+
+        // result = 'dealer' or 'player' or 'tie'
 
         if (timeLeft === 0) {
             onCompleteCountdown();
@@ -24,7 +26,7 @@ const GameResult = ({ role, onCompleteCountdown, secondsToCountdown = 5 }) => {
     return (
         <div>
             <CountdownBar width={width} />
-            <h2>{role === 'dealer' ? 'Dealer won...' : 'Player won!!!'}</h2>
+            <h2>{result === 'dealer' ? 'Dealer won...' : result === 'player' ? 'Player won!!!' : 'Tie'}</h2>
         </div>
     );
 };

@@ -22,6 +22,9 @@ class Blackjack {
         
         // this.playerHand.push(new Card('♦', 'K'), new Card('♥', 'A'));
         // this.dealerHand.push(new Card('♦', 'A'), new Card('♥', 'K'));
+
+        // this.playerHand.push(new Card('♦', 'K'), new Card('♥', 'A'));
+        // this.dealerHand.push(new Card('♦', '2'), new Card('♥', 'K'));
         
         this.updateScores();
     };
@@ -65,13 +68,17 @@ class Blackjack {
 
     updateScores() {
         this.playerScore = this.calculateScore(this.playerHand);
+        this.dealerScore = this.calculateScore(this.dealerHand);
         if(this.playerScore === 21) {
             this.decideWinner();
-        }
-        this.dealerScore = this.calculateScore(this.dealerHand);
+        };
     };
 
     decideWinner() {
+
+        console.log('player score:', this.playerScore);
+        console.log('dealer score:', this.dealerScore);
+
         if (this.playerScore > 21) {
             this.status = 'dealer_won';
         } else if (this.dealerScore > 21 || this.playerScore > this.dealerScore) {

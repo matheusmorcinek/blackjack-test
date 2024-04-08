@@ -22,8 +22,15 @@ const GameController = () => {
         if (currentStep === 'dealer_preparing_game') {
 
             if (blackjackStatus.status === 'succeeded' && blackjackStatus.data.status === 'player_won') {
-                console.log('use effect - player won')
+                console.log('[blackjackStatus.status] - player won')
                 setCurrentStep('game_result_player_won');
+                return;
+            };
+
+            if (blackjackStatus.status === 'succeeded' && blackjackStatus.data.status === 'tie') {
+                console.log('[blackjackStatus.status] - tie')
+                setCurrentStep('game_result_tie');
+                return;
             };
 
             if (blackjackStatus.status === 'succeeded') {
@@ -57,7 +64,7 @@ const GameController = () => {
 
     useEffect(() => {
         if (currentStep === 'player_action_message_display_hit') {
-
+            
             //check status
             if (blackjackPlayerHit.status === 'succeeded') {
                 dispatch(getBlackjackStatus());
@@ -98,7 +105,6 @@ const GameController = () => {
 
             if (blackjackStatus.data.status === 'tie') {
                 setCurrentStep('game_result_tie');
-                setTimeout(() => startNewGame(), 3000);
             };
 
             if (blackjackStatus.data.status === 'ongoing') {
@@ -111,9 +117,9 @@ const GameController = () => {
     if (currentStep === 'player_decision') return <PlayerDecision onTimeEnd={playerStand} />;
     if (currentStep === 'player_action_message_display_hit') return <GamePlayerActionMessages />;
     if (currentStep === 'player_action_message_display_stand') return <GamePlayerActionMessages />;
-    if (currentStep === 'game_result_dealer_won') return <GameResult role={'dealer'} onCompleteCountdown={onCompleteCountdown} secondsToCountdown={3} />;
-    if (currentStep === 'game_result_player_won') return <GameResult role={'player'} onCompleteCountdown={onCompleteCountdown} secondsToCountdown={3} />;
-    if (currentStep === 'game_result_tie') return <h2>Tie</h2>;
+    if (currentStep === 'game_result_dealer_won') return <GameResult result={'dealer'} onCompleteCountdown={onCompleteCountdown} secondsToCountdown={3} />;
+    if (currentStep === 'game_result_player_won') return <GameResult result={'player'} onCompleteCountdown={onCompleteCountdown} secondsToCountdown={3} />;
+    if (currentStep === 'game_result_tie') return <GameResult result={'tie'} onCompleteCountdown={onCompleteCountdown} secondsToCountdown={3} />;
 };
 
 export default GameController;
