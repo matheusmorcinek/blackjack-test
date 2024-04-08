@@ -10,17 +10,17 @@ app.use(cors({
 
 app.use(express.json());
 
-function simulateRandomDelay(req, res, next) {
-    const minDelay = 1000; 
-    const maxDelay = 3000; 
-    const delay = Math.floor(Math.random() * (maxDelay - minDelay + 1) + minDelay);
+// function simulateRandomDelay(req, res, next) {
+//     const minDelay = 1000; 
+//     const maxDelay = 3000; 
+//     const delay = Math.floor(Math.random() * (maxDelay - minDelay + 1) + minDelay);
 
-    setTimeout(() => {
-        next();
-    }, delay);
-};
+//     setTimeout(() => {
+//         next();
+//     }, delay);
+// };
 
-app.use(simulateRandomDelay);
+// app.use(simulateRandomDelay);
 
 let blackjack;
 

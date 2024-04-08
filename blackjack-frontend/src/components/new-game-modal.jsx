@@ -21,7 +21,7 @@ const NewGameModal = ({ onStartGame }) => {
                 <button
                     className={styles.button}
                     onClick={() => onStartGame(playerName)}
-                    disabled={!isNameEntered} // Button is disabled if no name is entered
+                    disabled={!isNameEntered} 
                 >
                     Start New Game
                 </button>

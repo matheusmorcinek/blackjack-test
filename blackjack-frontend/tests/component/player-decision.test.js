@@ -54,7 +54,6 @@ describe('PlayerDecision Component', () => {
         render(<PlayerDecision />);
         await waitFor(() => {
             expect(mockedDispatch).toHaveBeenCalledWith(expect.any(Function));
-            // Mock implementation should call setInterval, we expect this to happen
         });
     });
 });

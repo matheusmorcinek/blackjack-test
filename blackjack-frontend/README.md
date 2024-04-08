@@ -8,6 +8,8 @@ Game Interface: A clean and intuitive interface that allows players to easily st
 
 Responsive Design: Crafted to provide a seamless experience across devices, ensuring that players can enjoy the game on desktops, tablets, and smartphones.
 
+![Responsive Design](./responsive.gif "Responsive Design")
+
 Real-time Interaction: Players can draw cards (Hit) or end their turn (Stand) with immediate feedback, enhancing the game flow and decision-making process.
 
 Skeleton Loading: The UI employs skeleton loading screens to enhance user experience during data fetch operation or game actions, providing visual feedback that content is loading.
@@ -26,7 +28,9 @@ Automatic Actions with Countdowns:
 
 React: Utilized for its component-based architecture.
 
-CSS: For styling and responsive design, ensuring a seamless experience across different devices and screen sizes.
+CSS: (React CSS Modules) For styling and responsive design, ensuring a seamless experience across different devices and screen sizes.
+
+Redux and Thunk: Redux for state management, enabling predictable state updates across the application. Thunk middleware is utilized to handle asynchronous logic within Redux actions, facilitating interactions with the backend API and managing side effects seamlessly.
 
 ## Installation
 
@@ -39,6 +43,13 @@ install dependencies
 
 start the server
 ```npm run dev```
+
+### Running Component Tests
+
+Run the tests with
+```npm run test```
+
+![Component tests summary](./componenttests.png "Component tests summary")
 
 ### UI Screenshots and Gameplay
 

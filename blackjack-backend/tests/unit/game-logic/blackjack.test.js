@@ -8,8 +8,6 @@ describe('Blackjack class', () => {
         blackjack = new Blackjack();
     });
 
-    //game actions validations
-
     test('dealInitialCards gives two cards each to player and dealer', () => {
         blackjack.dealInitialCards();
         expect(blackjack.playerHand.length).toBe(2);
@@ -17,7 +15,7 @@ describe('Blackjack class', () => {
     });
 
     test('playerHit adds a card to player hand', () => {
-        blackjack.dealInitialCards(); // Ensure there are initial cards to simulate blackjack start
+        blackjack.dealInitialCards(); 
         const initialPlayerHandSize = blackjack.playerHand.length;
         blackjack.playerHit();
         expect(blackjack.playerHand.length).toBe(initialPlayerHandSize + 1);
@@ -30,7 +28,6 @@ describe('Blackjack class', () => {
     });
 
     test('decideWinner correctly identifies a player win', () => {
-        // Mocking scores directly for simplicity
         blackjack.playerScore = 20;
         blackjack.dealerScore = 18;
         blackjack.decideWinner();
@@ -38,14 +35,14 @@ describe('Blackjack class', () => {
     });
 
     test('decideWinner correctly identifies a dealer win due to player bust', () => {
-        blackjack.playerScore = 22; // Player busts
+        blackjack.playerScore = 22; 
         blackjack.dealerScore = 18;
         blackjack.decideWinner();
         expect(blackjack.status).toBe('dealer_won');
     });
 
     test('decideWinner correctly identifies a tie', () => {
-        blackjack.playerScore = 21; // Player busts
+        blackjack.playerScore = 21; 
         blackjack.dealerScore = 21;
         blackjack.decideWinner();
         expect(blackjack.status).toBe('tie');

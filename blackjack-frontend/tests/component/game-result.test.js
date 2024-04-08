@@ -25,15 +25,12 @@ describe('GameResult Component', () => {
         render(<GameResult result="dealer" onCompleteCountdown={jest.fn()} secondsToCountdown={secondsToCountdown} />);
 
         act(() => {
-            jest.advanceTimersByTime(1000); // Avança 1 segundo
+            jest.advanceTimersByTime(1000); 
         });
 
-        // Verifica se a largura da barra de contagem regressiva é correta após 1 segundo
-        const countdownBar = screen.getByTestId("countdown-bar");
         expect(countdownBar).toHaveStyle(`width: 80%`);
     });
 
-    // Restaura os timers reais após os testes
     afterAll(() => {
         jest.useRealTimers();
     });

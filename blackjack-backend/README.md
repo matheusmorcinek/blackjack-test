@@ -37,6 +37,8 @@ install dependencies
 start the server
 ```npm run dev```
 
+*note: 
+
 ### Environment Configuration
 
 PORT: The port on which your server will run (default is 3000).
