@@ -13,7 +13,7 @@ app.use(express.json());
 let blackjack;
 
 app.post('/blackjack/start', (req, res) => {
-    const delay = Math.floor(Math.random() * (1000 - 1000 + 1) + 1000); // Generates a random delay between 1000ms (1s) and 3000ms (3s)
+    const delay = Math.floor(Math.random() * (2000 - 1000 + 1) + 1000); // Generates a random delay between 1000ms (1s) and 3000ms (3s)
     setTimeout(() => {
         blackjack = new Blackjack();
         blackjack.dealInitialCards();
@@ -32,7 +32,7 @@ app.post('/blackjack/start', (req, res) => {
 });
 
 app.get('/blackjack/status', (req, res) => {
-    const delay = Math.floor(Math.random() * (1000 - 1000 + 1) + 1000); // Generates a random delay between 1000ms (1s) and 3000ms (3s)
+    const delay = Math.floor(Math.random() * (2000 - 1000 + 1) + 1000); // Generates a random delay between 1000ms (1s) and 3000ms (3s)
     setTimeout(() => {
         if (!blackjack || blackjack.status === 'not_started') {
             return res.status(400).json({

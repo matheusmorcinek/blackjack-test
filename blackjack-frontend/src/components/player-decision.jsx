@@ -10,11 +10,12 @@ const PlayerDecision = ({ onTimeEnd }) => {
 
     const [timer, setTimer] = useState(10);
     const [dots, setDots] = useState('');
+    const [actionDisabled, setActionDisabled] = useState(false);
 
     useEffect(() => {
         const interval = setInterval(() => {
             setDots((prevDots) => (prevDots.length < 3 ? prevDots + '.' : '.'));
-        }, 500); 
+        }, 500);
 
         return () => clearInterval(interval);
     }, []);
@@ -22,7 +23,7 @@ const PlayerDecision = ({ onTimeEnd }) => {
     useEffect(() => {
         if (timer === 0) {
             dispatch(playerStand());
-            onTimeEnd();
+            setActionDisabled(true);
             return;
         };
 
@@ -33,10 +34,20 @@ const PlayerDecision = ({ onTimeEnd }) => {
         return () => clearInterval(interval);
     }, [timer]);
 
+    // useEffect(() => {
+    //     if (blackjackHitStatus === 'loading' || blackjackStandStatus === 'loading') {
+    //         setActionDisabled(true);
+    //     } else {
+    //         setActionDisabled(false);
+    //     }
+    // }, [blackjackHitStatus, blackjackStandStatus]);
+
     const onHit = () => {
+        setActionDisabled(true);
         dispatch(playerHit());
     };
     const onStand = () => {
+        setActionDisabled(true);
         dispatch(playerStand());
     };
 
@@ -45,8 +56,8 @@ const PlayerDecision = ({ onTimeEnd }) => {
             <div className={styles.timer}>{timer} Make your decision<span>{dots}</span></div>
             <div className={styles.innerButtonContainer}>
                 <button className={`${styles.button} ${styles.disabledButton}`} disabled>Double</button>
-                <button className={`${styles.button} ${styles.hitButton}`} onClick={onHit}>Hit</button>
-                <button className={`${styles.button} ${styles.standButton}`} onClick={onStand}>Stand</button>
+                <button className={`${styles.button} ${actionDisabled ? styles.disabledButton : styles.hitButton}`} onClick={onHit} disabled={actionDisabled}>Hit</button>
+                <button className={`${styles.button} ${actionDisabled ? styles.disabledButton : styles.standButton}`} onClick={onStand} disabled={actionDisabled}>Stand</button>
                 <button className={`${styles.button} ${styles.disabledButton}`} disabled>Split</button>
             </div>
         </div>

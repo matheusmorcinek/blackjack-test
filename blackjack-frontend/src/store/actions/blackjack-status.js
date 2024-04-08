@@ -15,6 +15,19 @@ var requestOptions = {
     method: 'GET'
 };
 
+const printLastMatch = (data) => {
+    if (data.status !== 'ongoing') {
+        console.log('----------//----------')
+        console.log(`Last Match Status: ${data.status.toUpperCase()}`);
+        console.log('Player Hand:', formatHand(data.player.hand), `- Score: ${data.player.score}`);
+        console.log('Dealer Hand:', formatHand(data.dealer.hand), `- Score: ${data.dealer.score}`);
+    }
+};
+
+const formatHand = (hand) => hand.map(card => `${card.value}${card.suit}`).join(' ');
+
+
+
 // Thunk function
 export const getBlackjackStatus = () => async (dispatch) => {
     dispatch(blackjackStatusLoading());
@@ -25,6 +38,7 @@ export const getBlackjackStatus = () => async (dispatch) => {
                 response.json().then(parsedBody => {
 
                     dispatch(blackjackStatusLoaded(parsedBody));
+                    printLastMatch(parsedBody);
                 });
             };
 

@@ -1,3 +1,5 @@
+import { getBlackjackStatus } from './blackjack-status';
+
 export const BLACKJACK_PLAYER_HIT_LOADING = 'BLACKJACK_PLAYER_HIT_LOADING';
 export const BLACKJACK_PLAYER_HIT_FAILURE = 'BLACKJACK_PLAYER_HIT_FAILED';
 export const BLACKJACK_PLAYER_HIT_SUCCESS = 'BLACKJACK_PLAYER_HIT_LOADED';
@@ -27,6 +29,7 @@ export const playerHit = () => async (dispatch) => {
                 response.json().then(parsedBody => {
 
                     dispatch(blackjackPlayerHitLoaded(parsedBody));
+                    dispatch(getBlackjackStatus());
                 });
             };
 

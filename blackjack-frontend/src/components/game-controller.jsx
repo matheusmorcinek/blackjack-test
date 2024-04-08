@@ -10,116 +10,49 @@ import GameResult from './game-result';
 
 const GameController = () => {
 
+    //preciso que este componente controle o fluxo do jogo
+    //1. quando o jogo inicia, o dealer prepara o jogo e mostrar na tela as mensagens iniciais ( <InitialGameMessages />)
+    //2. após o dealer preparar o jogo, o jogador precisa tomar uma decisão ( <PlayerDecision onTimeEnd={playerStand} />)
+    //3. durante a tomada de decisão do jogador, o jogador pode clicar em hit ou stand em no maximo 10 segundos.
+    // caso o jogador não tome uma decisão, o jogo automaticamente chama a função playerStand
+    //4. após o jogador tomar uma decisão, o jogo precisa mostrar as mensagens de ação do jogador ( <GamePlayerActionMessages />)
+    //5. sempre que uma chamada de hit ou stand for feita, enquanto algum status está em loading, é preciso mostrar <GamePlayerActionMessages />
+    //6. sempre que um blackjackStatus.status retornar 'succeeded', precisamos verificar o status e apresentar <GameResult result={'dealer'} onCompleteCountdown={onCompleteCountdown} secondsToCountdown={5} /> se o status de blackjackStatus.data.status for 'dealer_won'
+    //ou <GameResult result={'player'} onCompleteCountdown={onCompleteCountdown} secondsToCountdown={5} /> se o status de blackjackStatus.data.status for 'player_won'
+    //ou <GameResult result={'tie'} onCompleteCountdown={onCompleteCountdown} secondsToCountdown={5} /> se o status de blackjackStatus.data.status for 'tie'
+    //ou <PlayerDecision onTimeEnd={playerStand} /> se o status de blackjackStatus.data.status for 'ongoing'
+    //7. sempre que um jogo terminar, a função onCompleteCountdown é chamada automaticamente pelo GameResult e um novo jogo é iniciado
+
     const dispatch = useDispatch();
-
     const blackjackStatus = useSelector((state) => state.blackjackStatus);
-    const blackjackPlayerHit = useSelector((state) => state.blackjackPlayerHit);
-    const blackjackPlayerStand = useSelector((state) => state.blackjackPlayerStand);
-
-    const [currentStep, setCurrentStep] = useState('dealer_preparing_game');
+    const blackjackStart = useSelector((state) => state.blackjackStart);
 
     useEffect(() => {
-        if (currentStep === 'dealer_preparing_game') {
-
-            if (blackjackStatus.status === 'succeeded' && blackjackStatus.data.status === 'player_won') {
-                console.log('[blackjackStatus.status] - player won')
-                setCurrentStep('game_result_player_won');
-                return;
-            };
-
-            if (blackjackStatus.status === 'succeeded' && blackjackStatus.data.status === 'tie') {
-                console.log('[blackjackStatus.status] - tie')
-                setCurrentStep('game_result_tie');
-                return;
-            };
-
-            if (blackjackStatus.status === 'succeeded') {
-                console.log('player decision')
-                setTimeout(() => setCurrentStep('player_decision'), 3000);
-            };
-        };
-    }, [currentStep, blackjackStatus.status]);
-
-    useEffect(() => {
-        if (currentStep === 'player_decision') {
-
-            if (blackjackPlayerHit.status === 'loading') {
-                setCurrentStep('player_action_message_display_hit');
-            };
-
-            if (blackjackPlayerStand.status === 'loading') {
-                setCurrentStep('player_action_message_display_stand');
-            };
-        };
-    }, [currentStep, blackjackPlayerHit.status, blackjackPlayerStand.status]);
-
-    useEffect(() => {
-        if (currentStep === 'player_action_message_display_stand') {
-
-            if (blackjackPlayerStand.status === 'succeeded') {
-                dispatch(getBlackjackStatus());
-            };
-        };
-    }, [currentStep, blackjackPlayerStand.status]);
-
-    useEffect(() => {
-        if (currentStep === 'player_action_message_display_hit') {
-            
-            //check status
-            if (blackjackPlayerHit.status === 'succeeded') {
-                dispatch(getBlackjackStatus());
-            };
-        };
-    }, [currentStep, blackjackPlayerHit.status]);
-
+        dispatch(startBlackjack());
+    }, [dispatch]);
 
     const playerStand = () => {
-        setCurrentStep('player_action_message_display_stand');
-    };
-
-    const startNewGame = () => {
-        console.log('calling startNewGame')
-        dispatch(startBlackjack());
-        setCurrentStep('dealer_preparing_game');
+        dispatch(getBlackjackStatus());
     };
 
     const onCompleteCountdown = () => {
-        console.log('terminouuu');
-        startNewGame();
+        dispatch(startBlackjack());
     };
 
-    //verifica status
-    useEffect(() => {
-        if (blackjackStatus.status === 'succeeded' && (
-            currentStep === 'player_action_message_display_hit' ||
-            currentStep === 'player_action_message_display_stand'
-        )) {
+    if (blackjackStart.status === 'loading') return <InitialGameMessages />;
 
-            if (blackjackStatus.data.status === 'dealer_won') {
-                setCurrentStep('game_result_dealer_won');
-            };
+    if (blackjackStart.status === 'failed') return <p>Failed to start the game</p>;
 
-            if (blackjackStatus.data.status === 'player_won') {
-                setCurrentStep('game_result_player_won');
-            };
+    if (blackjackStatus.status === 'loading') return <InitialGameMessages />;
 
-            if (blackjackStatus.data.status === 'tie') {
-                setCurrentStep('game_result_tie');
-            };
+    if (blackjackStatus.status === 'failed') return <p>Failed to get the game status</p>;
 
-            if (blackjackStatus.data.status === 'ongoing') {
-                setCurrentStep('player_decision');
-            };
-        };
-    }, [blackjackStatus.status]);
-
-    if (currentStep === 'dealer_preparing_game') return <InitialGameMessages />;
-    if (currentStep === 'player_decision') return <PlayerDecision onTimeEnd={playerStand} />;
-    if (currentStep === 'player_action_message_display_hit') return <GamePlayerActionMessages />;
-    if (currentStep === 'player_action_message_display_stand') return <GamePlayerActionMessages />;
-    if (currentStep === 'game_result_dealer_won') return <GameResult result={'dealer'} onCompleteCountdown={onCompleteCountdown} secondsToCountdown={3} />;
-    if (currentStep === 'game_result_player_won') return <GameResult result={'player'} onCompleteCountdown={onCompleteCountdown} secondsToCountdown={3} />;
-    if (currentStep === 'game_result_tie') return <GameResult result={'tie'} onCompleteCountdown={onCompleteCountdown} secondsToCountdown={3} />;
+    if (blackjackStatus.status === 'succeeded') {
+        if (blackjackStatus.data.status === 'dealer_won') return <GameResult result={'dealer'} onCompleteCountdown={onCompleteCountdown} secondsToCountdown={5} />;
+        if (blackjackStatus.data.status === 'player_won') return <GameResult result={'player'} onCompleteCountdown={onCompleteCountdown} secondsToCountdown={5} />;
+        if (blackjackStatus.data.status === 'tie') return <GameResult result={'tie'} onCompleteCountdown={onCompleteCountdown} secondsToCountdown={5} />;
+        if (blackjackStatus.data.status === 'ongoing') return <PlayerDecision onTimeEnd={playerStand} />;
+    };
 };
 
 export default GameController;

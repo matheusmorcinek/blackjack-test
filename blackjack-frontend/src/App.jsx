@@ -35,18 +35,11 @@ export function App() {
     dispatch(startBlackjack());
   };
 
-  useEffect(() => {
-
-    if (blackjack.status === 'succeeded') {
-      dispatch(getBlackjackStatus());
-    };
-  }, [dispatch, blackjack.status]);
-
   if (!gameStarted) return <NewGameModal onStartGame={handleStartGame} />;
 
   if (gameStarted) return (
     <>
-      {blackjack.status === 'succeeded' && blackjack.message !== '' && <Sidebar />}
+      <Sidebar />
       <div className={styles.container}>
         <Profile name={playerName} isLoading={blackjack.status === 'loading' && blackjack.message === ''} />
         {

@@ -1,4 +1,5 @@
 import { blackjackPlayerHitReset } from './blackjack-player-hit';
+import { getBlackjackStatus } from './blackjack-status';
 
 export const BLACKJACK_START_LOADING = 'BLACKJACK_START_LOADING';
 export const BLACKJACK_START_FAILURE = 'BLACKJACK_START_FAILED';
@@ -27,6 +28,7 @@ export const startBlackjack = () => async (dispatch) => {
                 response.json().then(parsedBody => {
 
                     dispatch(blackjackLoaded(parsedBody));
+                    dispatch(getBlackjackStatus());
                 });
             };
 
