@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react';
 import styles from '../styles/components/player-decision.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { playerHit } from '../store/actions/blackjack-player-hit';
+import { playerStand } from '../store/actions/blackjack-player-stand';
 
-const PlayerDecision = () => {
+const PlayerDecision = ({ onTimeEnd }) => {
 
     const dispatch = useDispatch();
 
-    const [timer, setTimer] = useState(60);
+    const [timer, setTimer] = useState(10);
     const [dots, setDots] = useState('');
 
     useEffect(() => {
@@ -20,6 +21,8 @@ const PlayerDecision = () => {
 
     useEffect(() => {
         if (timer === 0) {
+            dispatch(playerStand());
+            onTimeEnd();
             return;
         };
 
@@ -31,10 +34,12 @@ const PlayerDecision = () => {
     }, [timer]);
 
     const onHit = () => {
+        console.log('hit');
         dispatch(playerHit());
     };
     const onStand = () => {
-        
+        console.log('stand');
+        dispatch(playerStand());
     };
 
     return (

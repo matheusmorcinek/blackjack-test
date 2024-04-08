@@ -48,7 +48,7 @@ export function App() {
     <>
       {blackjack.status === 'succeeded' && <Sidebar />}
       <div className={styles.container}>
-        <Profile name={playerName} isLoading={blackjack.status === 'loading'} />
+        <Profile name={playerName} isLoading={blackjack.status === 'loading' && blackjack.message === ''} />
         {
           (status.status === 'succeeded' && blackjack.status === 'succeeded') ? (
             <div className={styles.gameContainer}>

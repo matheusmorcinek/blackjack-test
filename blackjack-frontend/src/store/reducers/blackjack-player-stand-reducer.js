@@ -1,32 +1,28 @@
 export const INITIAL_STATE = {
     status: 'idle', // or: 'loading', 'succeeded', 'failed'
-    message: ''
 };
 
-const blackjackStartReducer = (state = INITIAL_STATE, action) => {
+const blackjackPlayerStandReducer = (state = INITIAL_STATE, action) => {
 
     switch (action.type) {
 
-        case 'BLACKJACK_START_LOADED': {
+        case 'BLACKJACK_PLAYER_STAND_LOADED': {
 
             return {
-                status: 'succeeded',
-                message: action.payload.message
+                status: 'succeeded'
             };
         };
 
-        case 'BLACKJACK_START_LOADING': {
+        case 'BLACKJACK_PLAYER_STAND_LOADING': {
 
             return {
-                ...state,
                 status: 'loading'
             };
         };
 
-        case 'BLACKJACK_START_FAILED': {
+        case 'BLACKJACK_PLAYER_STAND_FAILED': {
 
             return {
-                ...state,
                 status: 'failed'
             };
         };
@@ -37,4 +33,4 @@ const blackjackStartReducer = (state = INITIAL_STATE, action) => {
     };
 };
 
-export default blackjackStartReducer;
+export default blackjackPlayerStandReducer;

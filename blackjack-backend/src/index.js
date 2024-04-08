@@ -89,26 +89,29 @@ app.post('/blackjack/player/hit', (req, res) => {
 });
 
 app.post('/blackjack/player/stand', (req, res) => {
-    if (!blackjack) {
-        return res.status(400).json({
-            message: "Game not found. Please start a new game."
-        });
-    };
+    const delay = Math.floor(Math.random() * (1000 - 1000 + 1) + 1000); // Generates a random delay between 1000ms (1s) and 3000ms (3s)
+    setTimeout(() => {
+        if (!blackjack) {
+            return res.status(400).json({
+                message: "Game not found. Please start a new game."
+            });
+        };
 
-    try {
-        blackjack.playerStand();
+        try {
+            blackjack.playerStand();
 
-        res.status(200).json({
-            player: {
-                hand: blackjack.playerHand,
-                score: blackjack.playerScore,
-            }
-        });
-    } catch (error) {
-        return res.status(400).json({
-            message: error.message
-        });
-    };
+            res.status(200).json({
+                player: {
+                    hand: blackjack.playerHand,
+                    score: blackjack.playerScore,
+                }
+            });
+        } catch (error) {
+            return res.status(400).json({
+                message: error.message
+            });
+        };
+    }, delay);
 });
 
 app.get('/blackjack/decideWinner', (req, res) => {

@@ -4,7 +4,7 @@ import SkeletonLoader from './skeleton-loader';
 const ProfileSkeleton = () => {
     return (<div className={styles.profileContainer}>
         <div className={styles.profileSkeletonImage}>
-            <SkeletonLoader style={{ width: '100%', height: '100%', borderRadius: '50%', marginLeft: '0' }} />
+            <SkeletonLoader style={{ width: '5.5rem', height: '5.5rem', borderRadius: '50%', marginLeft: '0' }} />
         </div>
         <div className={styles.profileInnerContainer}>
             <div className={styles.profileNameSkeleton}>

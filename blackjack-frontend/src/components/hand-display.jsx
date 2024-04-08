@@ -16,9 +16,9 @@ const HandDisplay = ({ role }) => {
             <div className={styles.innerContainer}>
                 {blackjackStatus.data[role].hand.map((card, index) => {
                     // For the dealer, hide the first card's value and suit
-                    if (role === 'dealer' && index === 0) {
-                        return <Card key={index} />;
-                    }
+                    // if (role === 'dealer' && index === 0) {
+                    //     return <Card key={index} />;
+                    // }
                     return <Card key={index} suit={card.suit} value={card.value} />;
                 })}
                 <div>

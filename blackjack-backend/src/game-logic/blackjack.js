@@ -19,7 +19,8 @@ class Blackjack {
     dealInitialCards() {
         this.playerHand.push(this.deck.draw(), this.deck.draw())
         this.dealerHand.push(this.deck.draw(), this.deck.draw());
-        // this.playerHand.push(new Card('♦', 'A'), new Card('♥', 'K'));
+        
+        // this.playerHand.push(new Card('♦', '9'), new Card('♥', '10'));
         // this.dealerHand.push(new Card('♦', 'A'), new Card('♥', 'K'));
         
         this.updateScores();
@@ -47,7 +48,8 @@ class Blackjack {
         };
 
         if(this.playerScore === 21) {
-            this.playerStand();
+            this.dealerPlay();
+            this.decideWinner();
         };
     };
 
