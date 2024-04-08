@@ -20,7 +20,7 @@ const MessageDisplay = ({ messages }) => {
     }, [currentMessageIndex]);
 
     return (
-        <div className={styles.messageContainer}>
+        <div data-testid="message-display" className={styles.messageContainer}>
             <p>{messages[currentMessageIndex]}</p>
         </div>
     );

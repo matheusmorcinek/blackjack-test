@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from '../styles/components/skeleton-loader.module.css';
 
 const SkeletonLoader = ({ style }) => {

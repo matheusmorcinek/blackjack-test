@@ -1,16 +1,17 @@
+import React from 'react';
 import styles from '../styles/components/profile.module.css';
 import SkeletonLoader from './skeleton-loader';
 
 const ProfileSkeleton = () => {
     return (<div className={styles.profileContainer}>
-        <div className={styles.profileSkeletonImage}>
+        <div data-testid='skeleton-loader-image' className={styles.profileSkeletonImage}>
             <SkeletonLoader style={{ width: '5.5rem', height: '5.5rem', borderRadius: '50%', marginLeft: '0' }} />
         </div>
         <div className={styles.profileInnerContainer}>
-            <div className={styles.profileNameSkeleton}>
+            <div data-testid='skeleton-loader-name' className={styles.profileNameSkeleton}>
                 <SkeletonLoader style={{ width: '100%', height: '100%', borderRadius: '1px' }} />
             </div>
-            <div className={styles.profileLevelSkeleton}>
+            <div data-testid='skeleton-loader-level' className={styles.profileLevelSkeleton}>
                 <SkeletonLoader style={{ width: '100%', height: '100%', borderRadius: '1px' }} />
             </div>
         </div>

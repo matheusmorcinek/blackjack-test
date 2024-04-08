@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import CountdownBar from "./countdown-bar";
 
@@ -24,7 +25,7 @@ const GameResult = ({ result, onCompleteCountdown, secondsToCountdown = 5 }) => 
     const width = (timeLeft / secondsToCountdown) * 100;
 
     return (
-        <div>
+        <div data-testid={`${result}-game-result`}>
             <CountdownBar width={width} />
             <h2>{result === 'dealer' ? 'Dealer won...' : result === 'player' ? 'Player won!!!' : 'Tie'}</h2>
         </div>

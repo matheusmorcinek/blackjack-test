@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import styles from '../styles/components/player-decision.module.css';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { playerHit } from '../store/actions/blackjack-player-hit';
 import { playerStand } from '../store/actions/blackjack-player-stand';
+import styles from '../styles/components/player-decision.module.css';
 
 const PlayerDecision = ({ onTimeEnd }) => {
 
@@ -34,14 +34,6 @@ const PlayerDecision = ({ onTimeEnd }) => {
         return () => clearInterval(interval);
     }, [timer]);
 
-    // useEffect(() => {
-    //     if (blackjackHitStatus === 'loading' || blackjackStandStatus === 'loading') {
-    //         setActionDisabled(true);
-    //     } else {
-    //         setActionDisabled(false);
-    //     }
-    // }, [blackjackHitStatus, blackjackStandStatus]);
-
     const onHit = () => {
         setActionDisabled(true);
         dispatch(playerHit());
@@ -52,7 +44,7 @@ const PlayerDecision = ({ onTimeEnd }) => {
     };
 
     return (
-        <div className={styles.decisionContainer}>
+        <div data-testid="player-decision" className={styles.decisionContainer}>
             <div className={styles.timer}>{timer} Make your decision<span>{dots}</span></div>
             <div className={styles.innerButtonContainer}>
                 <button className={`${styles.button} ${styles.disabledButton}`} disabled>Double</button>

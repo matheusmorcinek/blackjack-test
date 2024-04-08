@@ -10,7 +10,7 @@ const suitSymbols = {
 
 const Card = ({ suit, value }) => {
     return (
-        <div className={`${styles.card} ${styles[suitSymbols[suit]]}`}>
+        <div data-testid='card' className={`${styles.card} ${styles[suitSymbols[suit]]}`}>
             {value === 'Hidden' ? '?' : value}{suit === 'Hidden' ? '?' : suit}
         </div>
     );

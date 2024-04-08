@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from '../styles/components/countdown-bar.module.css';
 
 const CountdownBar = ({ width }) => {
