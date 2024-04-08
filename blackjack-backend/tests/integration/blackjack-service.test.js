@@ -9,19 +9,22 @@ describe('Blackjack API', () => {
             .expect('Content-Type', /json/)
             .expect(200);
 
-        expect(response.body).toHaveProperty('player');
-        expect(response.body).toHaveProperty('dealer');
-        expect(response.body.player.hand.length).toBe(2);
-        expect(response.body.dealer.hand.length).toBe(2);
+        expect(response.body).toHaveProperty('message');
+        expect(response.body.message).toBe('New game started');
     });
 
     test('POST /blackjack/hit should give the player one additional card', async () => {
         await request(app).post('/blackjack/start');
-        const response = await request(app)
-            .post('/blackjack/hit')
+        await request(app)
+            .post('/blackjack/player/hit')
             .expect(200);
 
-        expect(response.body.player.hand.length).toBe(3); 
+        const responseStatus = await request(app)
+            .get('/blackjack/status')
+            .expect('Content-Type', /json/)
+            .expect(200);
+
+        expect(responseStatus.body.player.hand.length).toBe(3);
     });
 
     test('GET /blackjack/status should return the current game status', async () => {
