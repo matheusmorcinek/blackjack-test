@@ -4,7 +4,7 @@ This project is a backend service designed to provide a seamless and interactive
 
 ## Features
 
-Game Initialization: Start a new game of Blackjack with the /blackjack/start endpoint. This initializes a new game session and deals the initial cards to both the player and the dealer.
+**Game Initialization:** Start a new game of Blackjack with the /blackjack/start endpoint. This initializes a new game session and deals the initial cards to both the player and the dealer.
 
 Game Status: The /blackjack/status endpoint provides the current status of the game, including both the player's and the dealer's hands, with the dealer's second card hidden unless the game has concluded.
 
@@ -32,10 +32,10 @@ Before installing, make sure you have [Node.js](https://nodejs.org/) installed. 
 ### Getting Started
 
 install dependencies
-- npm install
+```npm install```
 
 start the server
-- npm run dev
+```npm run dev```
 
 ### Environment Configuration
 
@@ -53,14 +53,14 @@ Here's a list of available API endpoints:
 ### Running Tests
 
 Run the tests with
-- npm run test
+```npm run test```
 
 ### Test coverage details
 
 The project aims to maintain a high standard of code quality and reliability, supported by comprehensive test coverage. We include both unit tests, which verify individual components work correctly in isolation, and integration tests, ensuring that those components interact correctly.
 
 Run the tests coverage with. 
-- npm run test:coverage
+```npm run test:coverage```
 
 Note: After running the command, a new folder 'coverage' will be created in the root folder. Find the there the detailed test coverage report.
 

@@ -19,7 +19,7 @@ Console Game Logs: For enthusiasts and developers, the game logs each match in t
 Automatic Actions with Countdowns:
 
  - Player Decision Countdown: When it's time for the player to decide whether to 'Hit' or 'Stand,' a countdown timer starts. If a decision isn't made before the countdown ends, the game automatically stands for the player, moving the game forward.
- 
+
  - Post-Game Countdown: After a game concludes and the results are displayed, a countdown timer begins, automatically starting a new game when it expires. This keeps the gameplay fluid and engaging.
 
 ## Technology Stack
@@ -35,10 +35,10 @@ Before installing, make sure you have [Node.js](https://nodejs.org/) installed. 
 ### Getting Started
 
 install dependencies
-- npm install
+```npm install```
 
 start the server
-- npm run dev
+```npm run dev```
 
 ### UI Screenshots and Gameplay
 
@@ -46,15 +46,15 @@ Below are screenshots showcasing various stages of the game and features of the 
 
 Start Screen: The initial view where players can start a new game.
 
-![Start Screen](./start-screen.png "Start Screen") -->
+![Start Screen](./start-screen.png "Start Screen")
 
 Gameplay Screen: Shows the player's and dealer's hands during a game.
 
-![Gameplay Screen](./gameplay-screen.png "Gameplay Screen") -->
+![Gameplay Screen](./gameplay-screen.png "Gameplay Screen")
 
 End Game: Displays the winner and options to restart the game.
 
-![End Game](./endgame-screen.png "End Game") -->
+![End Game](./endgame-screen.png "End Game")
 
 ### Gameplay 
 
