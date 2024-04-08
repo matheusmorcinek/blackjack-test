@@ -16,7 +16,6 @@ var requestOptions = {
 
 // Thunk function
 export const playerStand = () => async (dispatch) => {
-    console.log('@@@ calling player stand')
     dispatch(blackjackPlayerStandLoading());
     await fetch('http://localhost:3000/blackjack/player/stand', requestOptions)
         .then(response => {

@@ -34,11 +34,9 @@ const PlayerDecision = ({ onTimeEnd }) => {
     }, [timer]);
 
     const onHit = () => {
-        console.log('hit');
         dispatch(playerHit());
     };
     const onStand = () => {
-        console.log('stand');
         dispatch(playerStand());
     };
 
