@@ -3,24 +3,24 @@ const Blackjack = require('./game-logic/blackjack');
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const port = 3000;
 
 app.use(cors({
     origin: 'http://localhost:5173'
 }));
+
 app.use(express.json());
 
-function simulateRandomDelay(req, res, next) {
-    const minDelay = 1000; 
-    const maxDelay = 3000; 
-    const delay = Math.floor(Math.random() * (maxDelay - minDelay + 1) + minDelay);
+// function simulateRandomDelay(req, res, next) {
+//     const minDelay = 1000; 
+//     const maxDelay = 3000; 
+//     const delay = Math.floor(Math.random() * (maxDelay - minDelay + 1) + minDelay);
 
-    setTimeout(() => {
-        next();
-    }, delay);
-};
+//     setTimeout(() => {
+//         next();
+//     }, delay);
+// };
 
-app.use(simulateRandomDelay);
+// app.use(simulateRandomDelay);
 
 let blackjack;
 
@@ -103,45 +103,5 @@ app.post('/blackjack/player/stand', (req, res) => {
         });
     };
 });
-
-app.get('/blackjack/decideWinner', (req, res) => {
-    if (!blackjack) {
-        return res.status(400).json({
-            message: "Game not found. Please start a new game."
-        });
-    };
-
-    if (blackjack.status !== 'ongoing') {
-        return res.status(400).json({
-            message: "Game is already over."
-        });
-    };
-
-    blackjack.decideWinner();
-
-    const status = blackjack.status;
-    const resultMessage = status === 'player_won' ? "Player wins!" :
-        status === 'dealer_won' ? "Dealer wins." :
-            "It's a tie.";
-
-    res.json({
-        message: resultMessage,
-        status: status,
-        player: {
-            hand: blackjack.playerHand,
-            score: blackjack.playerScore,
-        },
-        dealer: {
-            hand: blackjack.dealerHand,
-            score: blackjack.dealerScore,
-        }
-    });
-});
-
-
-app.listen(port, () => {
-    console.log(`Server listening at http://localhost:${port}`);
-});
-
 
 module.exports = app;

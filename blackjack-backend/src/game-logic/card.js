@@ -2,8 +2,6 @@ class Card {
 
     constructor(suit, value) {
 
-        //ESTA PARTE AQUI É LEGAL COMITAR NA VERSAO ANTIGA, MESMA COISA DOS TESTES, E DEPOIS EDITAR
-
         const validSuits = ['♠', '♣', '♥', '♦'];
         const validValues = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
 
@@ -35,6 +33,5 @@ class Card {
         return `==== ${this.value} of ${this.suit} ====`;
     };
 };
-
 
 module.exports = Card;
