@@ -1,13 +1,16 @@
 /* countdown-bar.module.css */
 .countdownContainer {
+    position: absolute;
+    left: 0;
+    top: 0;
     width: 100%;
-    background-color: #eee;
-    border-radius: 5px;
+    background-color: var(--gray-line);
+    border-radius: 2px;
     overflow: hidden;
 }
 
 .countdownBar {
-    height: 20px;
-    background-color: #4caf50;
+    height: 3px;
+    background-color: var(--dark);
     transition: width 1s linear;
 }

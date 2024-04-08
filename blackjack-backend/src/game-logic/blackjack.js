@@ -20,7 +20,7 @@ class Blackjack {
         this.playerHand.push(this.deck.draw(), this.deck.draw())
         this.dealerHand.push(this.deck.draw(), this.deck.draw());
         
-        // this.playerHand.push(new Card('♦', '9'), new Card('♥', '10'));
+        // this.playerHand.push(new Card('♦', 'K'), new Card('♥', 'A'));
         // this.dealerHand.push(new Card('♦', 'A'), new Card('♥', 'K'));
         
         this.updateScores();

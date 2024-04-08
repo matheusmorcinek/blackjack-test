@@ -46,7 +46,7 @@ export function App() {
 
   if (gameStarted) return (
     <>
-      {blackjack.status === 'succeeded' && <Sidebar />}
+      {blackjack.status === 'succeeded' && blackjack.message !== '' && <Sidebar />}
       <div className={styles.container}>
         <Profile name={playerName} isLoading={blackjack.status === 'loading' && blackjack.message === ''} />
         {
