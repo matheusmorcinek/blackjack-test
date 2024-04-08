@@ -7,6 +7,7 @@
 .profileImage {
     height: 5.5rem;
     width: 5.5rem;
+    min-width: 5.5rem;
     border-radius: 50%;
     border: solid 1px var(--text);
 }
@@ -35,6 +36,7 @@
 .profileSkeletonImage {
     height: 5.5rem;
     width: 5.5rem;
+    min-width: 5.5rem;
     border-radius: 50%;
     border: solid 1px var(--white);
     margin-left: 0 !important;
