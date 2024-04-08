@@ -26,7 +26,7 @@ Through a series of endpoints, the API exposes functionality to start a new game
 
 ## Installation
 
-Before installing, make sure you have [Node.js](https://nodejs.org/) installed.
+Before installing, make sure you have [Node.js](https://nodejs.org/) installed. (v20.0.0+)
 
 
 ### Getting Started
