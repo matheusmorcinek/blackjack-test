@@ -25,7 +25,7 @@ const GameResult = ({ result, onCompleteCountdown, secondsToCountdown = 5 }) => 
     const width = (timeLeft / secondsToCountdown) * 100;
 
     return (
-        <div data-testid={`${result}-game-result`}>
+        <div id="game-result" data-testid={`${result}-game-result`}>
             <CountdownBar width={width} />
             <h2>{result === 'dealer' ? 'Dealer won...' : result === 'player' ? 'Player won!!!' : 'Tie'}</h2>
         </div>

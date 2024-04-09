@@ -44,13 +44,13 @@ const PlayerDecision = ({ onTimeEnd }) => {
     };
 
     return (
-        <div data-testid="player-decision" className={styles.decisionContainer}>
-            <div className={styles.timer}>{timer} Make your decision<span>{dots}</span></div>
+        <div id="player-decision" data-testid="player-decision" className={styles.decisionContainer}>
+            <div id="timer" className={styles.timer}>{timer} Make your decision<span>{dots}</span></div>
             <div className={styles.innerButtonContainer}>
-                <button className={`${styles.button} ${styles.disabledButton}`} disabled>Double</button>
-                <button className={`${styles.button} ${actionDisabled ? styles.disabledButton : styles.hitButton}`} onClick={onHit} disabled={actionDisabled}>Hit</button>
-                <button className={`${styles.button} ${actionDisabled ? styles.disabledButton : styles.standButton}`} onClick={onStand} disabled={actionDisabled}>Stand</button>
-                <button className={`${styles.button} ${styles.disabledButton}`} disabled>Split</button>
+                <button id="double-button" className={`${styles.button} ${styles.disabledButton}`} disabled>Double</button>
+                <button id="hit-button" className={`${styles.button} ${actionDisabled ? styles.disabledButton : styles.hitButton}`} onClick={onHit} disabled={actionDisabled}>Hit</button>
+                <button id="stand-button" className={`${styles.button} ${actionDisabled ? styles.disabledButton : styles.standButton}`} onClick={onStand} disabled={actionDisabled}>Stand</button>
+                <button id="split-button" className={`${styles.button} ${styles.disabledButton}`} disabled>Split</button>
             </div>
         </div>
     );

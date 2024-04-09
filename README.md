@@ -9,6 +9,8 @@ Welcome to the repository for the Blackjack Card Game, a full-stack application 
 
 /blackjack-backend: Houses the Express.js backend application. This component handles game logic and API responses.
 
+/blackjack-automation: Contains the Cypress automated tests.
+
 ## Getting Started
 
 To get started with the Blackjack Game, you may choose to set up the frontend, the backend, or both, depending on your focus. Each part of the project has its own set of installation instructions, development guidelines, and features.
@@ -18,3 +20,6 @@ For details on setting up and running the frontend application, please refer to 
 
 ### Backend
 For information on setting up and operating the backend service, head over to the Backend README. [Backend README](./blackjack-backend/README.md).
+
+### Test Automation
+For information on setting up and operating the cypress automation, please check the README. [Automation README](./blackjack-automation/README.md).
